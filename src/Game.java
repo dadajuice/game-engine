@@ -1,41 +1,30 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Game {
 
     private static final int SLEEP = 25;
 
+    private RenderingEngine renderingEngine;
     private Ball ball;
-    private JFrame frame;
-    private JPanel panel;
     private boolean playing = true;
-    private BufferedImage bufferedImage;
-    private Graphics2D buffer;
     private long before;
     private int score = 0;
 
     public Game() {
-        initializeFrame();
-        initializePanel();
+        renderingEngine = new RenderingEngine();
         ball = new Ball(25);
     }
 
     public void start() {
-        frame.setVisible(true);
+        renderingEngine.start();
         updateSyncTime();
-
         while (playing) {
-            bufferedImage = new BufferedImage(800, 600,
-                    BufferedImage.TYPE_INT_RGB);
-            buffer = bufferedImage.createGraphics();
-            buffer.setRenderingHints(buildRenderingHints());
-
             update();
-            drawOnBuffer();
-            drawBufferOnScreen();
+            drawOnBuffer(renderingEngine.buildBuffer());
+            renderingEngine.drawBufferOnScreen();
             sleep();
         }
+        renderingEngine.stop();
     }
 
     private void update() {
@@ -45,36 +34,10 @@ public class Game {
         }
     }
 
-    private void drawOnBuffer() {
+    private void drawOnBuffer(Graphics2D buffer) {
         ball.draw(buffer);
         buffer.setPaint(Color.WHITE);
         buffer.drawString("Score: " + score, 10, 20);
-    }
-
-    private void drawBufferOnScreen() {
-        Graphics2D graphics = (Graphics2D) panel.getGraphics();
-        graphics.drawImage(bufferedImage, 0, 0, panel);
-        Toolkit.getDefaultToolkit().sync();
-        graphics.dispose();
-    }
-
-    private void initializeFrame() {
-        frame = new JFrame();
-        frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setTitle("My Bouncing Ball");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setState(JFrame.NORMAL);
-        //frame.setUndecorated(true);
-    }
-
-    private void initializePanel() {
-        panel = new JPanel();
-        panel.setBackground(Color.BLUE);
-        panel.setFocusable(true);
-        panel.setDoubleBuffered(true);
-        frame.add(panel);
     }
 
     private void updateSyncTime() {
@@ -96,14 +59,5 @@ public class Game {
             sleep = 4;
         }
         return sleep;
-    }
-
-    private RenderingHints buildRenderingHints() {
-        RenderingHints hints = new RenderingHints(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-        hints.put(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-        return hints;
     }
 }
