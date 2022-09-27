@@ -23,7 +23,7 @@ public class Game {
 
     public void start() {
         frame.setVisible(true);
-        before = System.currentTimeMillis();
+        updateSyncTime();
 
         while (playing) {
             bufferedImage = new BufferedImage(800, 600,
@@ -49,7 +49,7 @@ public class Game {
             } catch (InterruptedException exception) {
                 exception.printStackTrace();
             }
-            before = System.currentTimeMillis();
+            updateSyncTime();
         }
     }
 
@@ -92,5 +92,7 @@ public class Game {
         frame.add(panel);
     }
 
-
+    private void updateSyncTime() {
+        before = System.currentTimeMillis();
+    }
 }
