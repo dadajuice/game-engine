@@ -28,13 +28,8 @@ public class Game {
         while (playing) {
             bufferedImage = new BufferedImage(800, 600,
                     BufferedImage.TYPE_INT_RGB);
-            RenderingHints rh = new RenderingHints(
-                    RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-            rh.put(RenderingHints.KEY_RENDERING,
-                    RenderingHints.VALUE_RENDER_QUALITY);
             buffer = bufferedImage.createGraphics();
-            buffer.setRenderingHints(rh);
+            buffer.setRenderingHints(buildRenderingHints());
 
             update();
             drawOnBuffer();
@@ -94,5 +89,14 @@ public class Game {
 
     private void updateSyncTime() {
         before = System.currentTimeMillis();
+    }
+
+    private RenderingHints buildRenderingHints() {
+        RenderingHints hints = new RenderingHints(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        hints.put(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        return hints;
     }
 }
