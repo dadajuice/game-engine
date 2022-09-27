@@ -16,7 +16,7 @@ public abstract class Game {
         renderingEngine = new RenderingEngine();
     }
 
-    public void start() {
+    public final void start() {
         initialize();
         run();
         conclude();
