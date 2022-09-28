@@ -29,7 +29,7 @@ public abstract class Game {
             update();
             drawOnBuffer(renderingEngine.buildBuffer());
             renderingEngine.drawBufferOnScreen();
-            gameTime.sleep();
+            gameTime.synchronize();
         }
         renderingEngine.stop();
     }

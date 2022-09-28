@@ -23,5 +23,7 @@ public class BouncingBallGame extends Game {
     protected void drawOnBuffer(Buffer buffer) {
         ball.draw(buffer);
         buffer.drawString("Score: " + score, 10, 20, Color.WHITE);
+        buffer.drawString(GameTime.getElapsedFormattedTime(), 10, 40, Color.WHITE);
+        buffer.drawString("FPS: " + GameTime.getCurrentFps(), 10, 60, Color.WHITE);
     }
 }
