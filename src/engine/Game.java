@@ -1,5 +1,7 @@
 package engine;
 
+import java.awt.event.KeyListener;
+
 public abstract class Game {
 
     private RenderingEngine renderingEngine;
@@ -22,6 +24,10 @@ public abstract class Game {
 
     protected void conclude() {
 
+    }
+
+    protected void addKeyListener(KeyListener listener) {
+        renderingEngine.addKeyListener(listener);
     }
 
     private void run() {
