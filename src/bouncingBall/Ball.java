@@ -1,3 +1,5 @@
+package bouncingBall;
+
 import engine.Buffer;
 
 import java.awt.*;
