@@ -1,3 +1,5 @@
+package engine;
+
 public abstract class Game {
 
     private RenderingEngine renderingEngine;

@@ -1,3 +1,7 @@
+import engine.Buffer;
+import engine.Game;
+import engine.GameTime;
+
 import java.awt.*;
 
 public class BouncingBallGame extends Game {

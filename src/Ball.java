@@ -1,3 +1,5 @@
+import engine.Buffer;
+
 import java.awt.*;
 import java.util.Random;
 
