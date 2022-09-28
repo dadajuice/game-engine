@@ -1,12 +1,8 @@
-import java.awt.*;
-
 public abstract class Game {
-
-    private static final int SLEEP = 25;
 
     private RenderingEngine renderingEngine;
     private boolean playing = true;
-    private long before;
+    private GameTime gameTime;
 
     protected abstract void initialize();
     protected abstract void update();
@@ -28,34 +24,13 @@ public abstract class Game {
 
     private void run() {
         renderingEngine.start();
-        updateSyncTime();
+        gameTime = new GameTime();
         while (playing) {
             update();
             drawOnBuffer(renderingEngine.buildBuffer());
             renderingEngine.drawBufferOnScreen();
-            sleep();
+            gameTime.sleep();
         }
         renderingEngine.stop();
-    }
-
-    private void updateSyncTime() {
-        before = System.currentTimeMillis();
-    }
-
-    private void sleep() {
-        try {
-            Thread.sleep(getSleepTime());
-        } catch (InterruptedException exception) {
-            exception.printStackTrace();
-        }
-        updateSyncTime();
-    }
-
-    private long getSleepTime() {
-        long sleep = SLEEP - (System.currentTimeMillis() - before);
-        if (sleep < 4) {
-            sleep = 4;
-        }
-        return sleep;
     }
 }
