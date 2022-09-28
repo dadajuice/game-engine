@@ -10,7 +10,7 @@ public abstract class Game {
 
     protected abstract void initialize();
     protected abstract void update();
-    protected abstract void drawOnBuffer(Graphics2D buffer);
+    protected abstract void drawOnBuffer(Buffer buffer);
 
     public Game() {
         renderingEngine = new RenderingEngine();

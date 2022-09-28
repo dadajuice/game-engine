@@ -7,7 +7,6 @@ public class RenderingEngine {
     private JFrame frame;
     private JPanel panel;
     private BufferedImage bufferedImage;
-    private Graphics2D buffer;
 
     public RenderingEngine() {
         initializeFrame();
@@ -23,12 +22,12 @@ public class RenderingEngine {
         frame.dispose();
     }
 
-    public Graphics2D buildBuffer() {
+    public Buffer buildBuffer() {
         bufferedImage = new BufferedImage(800, 600,
                 BufferedImage.TYPE_INT_RGB);
-        buffer = bufferedImage.createGraphics();
-        buffer.setRenderingHints(buildRenderingHints());
-        return buffer;
+        Graphics2D graphics = bufferedImage.createGraphics();
+        graphics.setRenderingHints(buildRenderingHints());
+        return new Buffer(graphics);
     }
 
     public void drawBufferOnScreen() {
