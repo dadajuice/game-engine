@@ -26,6 +26,10 @@ public abstract class Game {
 
     }
 
+    protected void stop() {
+        playing = false;
+    }
+
     protected void addKeyListener(KeyListener listener) {
         renderingEngine.addKeyListener(listener);
     }
