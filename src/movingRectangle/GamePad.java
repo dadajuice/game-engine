@@ -1,5 +1,7 @@
 package movingRectangle;
 
+import engine.MovementController;
+
 import java.awt.event.KeyEvent;
 
 public class GamePad extends MovementController {

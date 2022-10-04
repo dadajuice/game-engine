@@ -1,4 +1,4 @@
-package movingRectangle;
+package engine;
 
 import java.awt.event.KeyEvent;
 

@@ -1,4 +1,4 @@
-package movingRectangle;
+package engine;
 
 import engine.RenderingEngine;
 
