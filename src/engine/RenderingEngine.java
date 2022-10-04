@@ -7,13 +7,16 @@ import java.awt.image.BufferedImage;
 
 public class RenderingEngine {
 
+    private static RenderingEngine instance;
     private JFrame frame;
     private JPanel panel;
     private BufferedImage bufferedImage;
 
-    public RenderingEngine() {
-        initializeFrame();
-        initializePanel();
+    public static RenderingEngine getInstance() {
+        if (instance == null) {
+            instance = new RenderingEngine();
+        }
+        return instance;
     }
 
     public void addKeyListener(KeyListener listener) {
@@ -42,6 +45,11 @@ public class RenderingEngine {
         graphics.drawImage(bufferedImage, 0, 0, panel);
         Toolkit.getDefaultToolkit().sync();
         graphics.dispose();
+    }
+
+    private RenderingEngine() {
+        initializeFrame();
+        initializePanel();
     }
 
     private void initializeFrame() {

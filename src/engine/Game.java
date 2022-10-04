@@ -1,19 +1,16 @@
 package engine;
 
-import java.awt.event.KeyListener;
-
 public abstract class Game {
 
-    private RenderingEngine renderingEngine;
+    private final RenderingEngine renderingEngine;
     private boolean playing = true;
-    private GameTime gameTime;
 
     protected abstract void initialize();
     protected abstract void update();
     protected abstract void drawOnBuffer(Buffer buffer);
 
     public Game() {
-        renderingEngine = new RenderingEngine();
+        renderingEngine = RenderingEngine.getInstance();
     }
 
     public final void start() {
@@ -30,13 +27,9 @@ public abstract class Game {
         playing = false;
     }
 
-    protected void addKeyListener(KeyListener listener) {
-        renderingEngine.addKeyListener(listener);
-    }
-
     private void run() {
         renderingEngine.start();
-        gameTime = new GameTime();
+        GameTime gameTime = new GameTime();
         while (playing) {
             update();
             drawOnBuffer(renderingEngine.buildBuffer());
