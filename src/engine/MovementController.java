@@ -37,6 +37,22 @@ public class MovementController extends Controller {
                 || isLeftPressed() || isRightPressed();
     }
 
+    public Direction getMoveDirection() {
+        if (isUpPressed()) {
+            return Direction.UP;
+        }
+        if (isDownPressed()) {
+            return Direction.DOWN;
+        }
+        if (isLeftPressed()) {
+            return Direction.LEFT;
+        }
+        if (isRightPressed()) {
+            return Direction.RIGHT;
+        }
+        return null;
+    }
+
     public void setUpKey(int upKey) {
         removeKey(this.upKey);
         bindKey(upKey);
