@@ -1,21 +1,19 @@
 package footprintGame;
 
 import engine.Buffer;
+import engine.MovableEntity;
 
 import java.awt.*;
 
-public class Player {
+public class Player extends MovableEntity {
 
     private GamePad gamePad;
-    private int x;
-    private int y;
-    private int speed;
 
     public Player(GamePad gamePad) {
         this.gamePad = gamePad;
-        x = 200;
-        y = 200;
-        speed = 3;
+        teleport(200, 200);
+        setDimension(20, 60);
+        setSpeed(3);
     }
 
     public Footprint layFootprint() {
@@ -24,17 +22,17 @@ public class Player {
 
     public void update() {
         if (gamePad.isDownPressed()) {
-            y += speed;
+            moveDown();
         } else if (gamePad.isUpPressed()) {
-            y -= speed;
+            moveUp();
         } else if (gamePad.isLeftPressed()) {
-            x -= speed;
+            moveLeft();
         } else if (gamePad.isRightPressed()) {
-            x += speed;
+            moveRight();
         }
     }
 
     public void draw(Buffer buffer) {
-        buffer.drawRectangle(x, y, 20, 60, Color.WHITE);
+        buffer.drawRectangle(x, y, width, height, Color.WHITE);
     }
 }

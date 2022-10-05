@@ -1,7 +1,5 @@
 package engine;
 
-import engine.RenderingEngine;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
