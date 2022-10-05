@@ -12,6 +12,13 @@ public class GamePad extends MovementController {
         bindKey(quitKey);
     }
 
+    public void useWasdKeys() {
+        setUpKey(KeyEvent.VK_W);
+        setDownKey(KeyEvent.VK_S);
+        setLeftKey(KeyEvent.VK_A);
+        setRightKey(KeyEvent.VK_D);
+    }
+
     public boolean isQuitPressed() {
         return isKeyPressed(quitKey);
     }
