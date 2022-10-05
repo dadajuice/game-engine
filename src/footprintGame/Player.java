@@ -1,16 +1,14 @@
 package footprintGame;
 
 import engine.Buffer;
-import engine.MovableEntity;
+import engine.ControllableEntity;
 
 import java.awt.*;
 
-public class Player extends MovableEntity {
-
-    private GamePad gamePad;
+public class Player extends ControllableEntity {
 
     public Player(GamePad gamePad) {
-        this.gamePad = gamePad;
+        super(gamePad);
         teleport(200, 200);
         setDimension(20, 60);
         setSpeed(3);
@@ -21,15 +19,7 @@ public class Player extends MovableEntity {
     }
 
     public void update() {
-        if (gamePad.isDownPressed()) {
-            moveDown();
-        } else if (gamePad.isUpPressed()) {
-            moveUp();
-        } else if (gamePad.isLeftPressed()) {
-            moveLeft();
-        } else if (gamePad.isRightPressed()) {
-            moveRight();
-        }
+        moveWithController();
     }
 
     public void draw(Buffer buffer) {
