@@ -1,6 +1,7 @@
 package tankGame;
 
 import engine.Buffer;
+import engine.CollidableRepository;
 import engine.Direction;
 import engine.MovableEntity;
 
@@ -28,6 +29,7 @@ public class Missile extends MovableEntity {
             teleport(tank.getX() + 15 - 2, tank.getY() - 9);
             setDimension(4, 8);
         }
+        CollidableRepository.getInstance().registerEntity(this);
     }
 
     @Override

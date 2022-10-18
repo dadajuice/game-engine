@@ -1,6 +1,7 @@
 package tankGame;
 
 import engine.Buffer;
+import engine.CollidableRepository;
 import engine.ControllableEntity;
 import engine.MovementController;
 
@@ -15,6 +16,7 @@ public class Tank extends ControllableEntity {
         setDimension(30, 30);
         setSpeed(2);
         teleport(100, 100);
+        CollidableRepository.getInstance().registerEntity(this);
     }
 
     public Missile fire() {
