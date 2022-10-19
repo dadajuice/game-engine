@@ -2,6 +2,7 @@ package vikingGame;
 
 import engine.Buffer;
 import engine.ControllableEntity;
+import engine.Direction;
 import engine.MovementController;
 
 import javax.imageio.ImageIO;
@@ -12,11 +13,15 @@ import java.io.IOException;
 public class Player extends ControllableEntity {
 
     private static final String SPRITE_PATH = "images/player.png";
+    private static final int ANIMATION_SPEED = 8;
+
     private BufferedImage spriteSheet;
     private Image[] rightFrames;
     private Image[] leftFrames;
     private Image[] upFrames;
     private Image[] downFrames;
+    private int currentAnimationFrame = 1; // idle frame (middle)
+    private int nextFrame = ANIMATION_SPEED;
 
     public Player(MovementController controller) {
         super(controller);
@@ -31,13 +36,33 @@ public class Player extends ControllableEntity {
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawImage(downFrames[1], x, y);
+        if (getDirection() == Direction.RIGHT) {
+            buffer.drawImage(rightFrames[currentAnimationFrame], x, y);
+        } else if (getDirection() == Direction.LEFT) {
+            buffer.drawImage(leftFrames[currentAnimationFrame], x, y);
+        } else if (getDirection() == Direction.UP) {
+            buffer.drawImage(upFrames[currentAnimationFrame], x, y);
+        }  else if (getDirection() == Direction.DOWN) {
+            buffer.drawImage(downFrames[currentAnimationFrame], x, y);
+        }
     }
 
     @Override
     public void update() {
         super.update();
         moveWithController();
+        if (hasMoved()) {
+            --nextFrame;
+            if (nextFrame == 0) {
+                ++currentAnimationFrame;
+                if (currentAnimationFrame >= leftFrames.length) {
+                    currentAnimationFrame = 0;
+                }
+                nextFrame = ANIMATION_SPEED;
+            }
+        } else {
+            currentAnimationFrame = 1; // Idle frame (middle)
+        }
     }
 
     private void loadSpriteSheet() {
