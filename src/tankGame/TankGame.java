@@ -1,7 +1,9 @@
 package tankGame;
 
 import engine.Buffer;
+import engine.CollidableRepository;
 import engine.Game;
+import engine.StaticEntity;
 
 import java.util.ArrayList;
 
@@ -34,8 +36,25 @@ public class TankGame extends Game {
             missiles.add(tank.fire());
         }
         tank.update();
+
+        ArrayList<StaticEntity> killedElements = new ArrayList<>();
         for (Missile missile : missiles) {
             missile.update();
+            for (Brick brick : bricks) {
+                if (missile.hitBoxIntersectWith(brick)) {
+                    killedElements.add(brick);
+                    killedElements.add(missile);
+                }
+            }
+        }
+
+        for (StaticEntity entity : killedElements) {
+            if (entity instanceof Brick) {
+                bricks.remove(entity);
+            } else if (entity instanceof Missile) {
+                missiles.remove(entity);
+            }
+            CollidableRepository.getInstance().unregisterEntity(entity);
         }
     }
 
