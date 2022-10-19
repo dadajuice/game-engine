@@ -16,7 +16,6 @@ public class Tank extends ControllableEntity {
         setDimension(30, 30);
         setSpeed(2);
         teleport(100, 100);
-        CollidableRepository.getInstance().registerEntity(this);
     }
 
     public Missile fire() {
@@ -30,6 +29,7 @@ public class Tank extends ControllableEntity {
 
     @Override
     public void update() {
+        super.update();
         moveWithController();
         cooldown--;
         if (cooldown < 0) {
@@ -40,5 +40,8 @@ public class Tank extends ControllableEntity {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawRectangle(x, y, width, height, Color.GREEN);
+        if (hasMoved()) {
+            drawHitBox(buffer);
+        }
     }
 }
