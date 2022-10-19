@@ -13,6 +13,7 @@ public class VikingGame extends Game {
     protected void initialize() {
         gamePad = new GamePad();
         player = new Player(gamePad);
+        player.load();
         world = new World();
         world.load();
         player.teleport(200, 200);
